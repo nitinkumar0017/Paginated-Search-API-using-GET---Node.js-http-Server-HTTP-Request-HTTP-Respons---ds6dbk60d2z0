@@ -11,17 +11,18 @@ app.get('/search', (req, res) => {
 
  // TODO: Implement the search and pagination logic here
   const {name,limit=5,page =1} = req.query;
+  const sanitizedPage = Number(page)
   if(!name){
     return res.status(400).json({"error": "Search name parameter is required."})
   }
   const response = allArticles.filter((item)=> item.title.toLowerCase().includes(name.toLocaleLowerCase()))
 
-  const endingIdx = (page*limit)-1
+  const endingIdx = (sanitizedPage*limit)-1
   const startingIdx = endingIdx - (limit-1);
   const  filterResponse = response.filter((_,idx)=> idx>=startingIdx && idx<=endingIdx)
 
   return res.status(200).json({
-    "currentPage": page,
+    "currentPage": sanitizedPage,
     "totalPages": Math.ceil(response.length /limit),
     "totalResults": response.length,
     "articles": filterResponse
