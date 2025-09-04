@@ -24,7 +24,7 @@ app.get('/search', (req, res) => {
     "currentPage": page,
     "totalPages": Math.ceil(response.length /limit),
     "totalResults": response.length,
-    "articles": filterResponse
+    "articles": response
   })
 });
 
