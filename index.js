@@ -22,8 +22,8 @@ app.get('/search', (req, res) => {
 
   return res.status(200).json({
     "currentPage": page,
-    "totalPages": page.length/limit,
-    "totalResults": filterResponse.length,
+    "totalPages": Math.ceil(response.length /limit),
+    "totalResults": response.length,
     "articles": filterResponse
   })
 });
