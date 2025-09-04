@@ -18,13 +18,13 @@ app.get('/search', (req, res) => {
 
   const endingIdx = (page*limit)-1
   const startingIdx = endingIdx - (limit-1);
-  const  filterResponse = response.filter((_,idx)=> startingIdx && idx<=endingIdx)
+  const  filterResponse = response.filter((_,idx)=> idx>=startingIdx && idx<=endingIdx)
 
   return res.status(200).json({
     "currentPage": page,
     "totalPages": Math.ceil(response.length /limit),
     "totalResults": response.length,
-    "articles": response
+    "articles": filterResponse
   })
 });
 
